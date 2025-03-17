@@ -3,8 +3,6 @@ import { DataServicesModule } from './services/data-services.module/data-service
 import { CourseUseCasesModule } from './use-cases/courses/course-usecase.module';
 import { CourseResolver } from './resolvers/course.resolver';
 
-
-
 @Module({
   imports: [
     DataServicesModule,

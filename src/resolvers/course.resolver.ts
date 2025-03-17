@@ -1,25 +1,12 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Int,
-  ResolveReference,
-} from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import {
   BadRequestException,
-  Body,
-  Get,
   InternalServerErrorException,
-  Param,
-  Post,
 } from '@nestjs/common';
 
 import { CourseUseCases } from 'src/use-cases/courses/course.use-case';
 import { CourseDto, UpdateCourseDto } from 'src/core/dtos';
 import { Course } from 'src/core/dtos/courseType';
-
-
 
 @Resolver(() => Course)
 export class CourseResolver {
@@ -31,7 +18,7 @@ export class CourseResolver {
   }
 
   @Query(() => Course, { nullable: true })
-  async getById(@Args('id', { type: () => String }) id: string,) {
+  async getById(@Args('id', { type: () => String }) id: string) {
     return this.courseUseCases.getCourseById(id);
   }
 
@@ -40,18 +27,20 @@ export class CourseResolver {
     return this.courseUseCases.createUser(input);
   }
 
-
-    @Mutation(() => Course) //Update user
-    async updateCourse(
-      @Args('input') updateCourseInput: UpdateCourseDto,
-    ): Promise<Course> {
-      try {
-        return this.courseUseCases.updateCourse(updateCourseInput.id, updateCourseInput);
-      } catch (error) {
-        if (error instanceof BadRequestException) {
-          throw new BadRequestException(error.message);
-        }
-        throw new InternalServerErrorException('An unexpected error occurred');
+  @Mutation(() => Course) //Update user
+  async updateCourse(
+    @Args('input') updateCourseInput: UpdateCourseDto,
+  ): Promise<Course> {
+    try {
+      return this.courseUseCases.updateCourse(
+        updateCourseInput.id,
+        updateCourseInput,
+      );
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw new BadRequestException(error.message);
       }
+      throw new InternalServerErrorException('An unexpected error occurred');
     }
+  }
 }
