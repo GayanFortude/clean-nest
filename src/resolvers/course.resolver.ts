@@ -17,7 +17,8 @@ import {
 
 import { CourseUseCases } from 'src/use-cases/courses/course.use-case';
 import { CourseDto, UpdateCourseDto } from 'src/core/dtos';
-import { Course } from 'src/frameworks/model/courses.model';
+import { Course } from 'src/core/dtos/courseType';
+
 
 
 @Resolver(() => Course)
