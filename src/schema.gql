@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Course {
+  id: String!
+  name: String!
+  code: ID!
+}
+
+type Query {
+  getAll: [Course!]!
+  getById(id: String!): Course
+}
+
+type Mutation {
+  createCourse(input: CourseDto!): Course!
+}
+
+input CourseDto {
+  name: String!
+  code: String!
+}

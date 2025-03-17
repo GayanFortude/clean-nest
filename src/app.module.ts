@@ -3,6 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { CourseModule } from './courses/course.module';
 import { Course as CourseEntity } from './courses/entities/course';
+import { DataServicesModule } from './services/data-services.module/data-services.module';
+import { CourseUseCasesModule } from './use-cases/courses/course-usecase.module';
+import { CourseResolver } from './resolvers/course.resolver';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
+import { PostGrayDataServicesModule } from './frameworks/graphql-data-services.module';
 
 const encryptedSecrets = {
   username: '20162041fe346d0d09b5a5d9e50d3daf',
@@ -22,19 +29,20 @@ function decrypt(encrypted: string): string {
 
 @Module({
   imports: [
-    CourseModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: decrypt(encryptedSecrets.username),
-      password: decrypt(encryptedSecrets.password),
-      database: decrypt(encryptedSecrets.database),
-      entities: [CourseEntity],
-      synchronize: true,
-    }),
+    DataServicesModule,
+    CourseUseCasesModule
+    // CourseModule,
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: 'localhost',
+    //   port: 5432,
+    //   username: decrypt(encryptedSecrets.username),
+    //   password: decrypt(encryptedSecrets.password),
+    //   database: decrypt(encryptedSecrets.database),
+    //   entities: [CourseEntity],
+    //   synchronize: true,
+    // }),
   ],
-  controllers: [],
-  providers: [],
+   providers: [CourseResolver]
 })
 export class AppModule {}
