@@ -1,4 +1,4 @@
-import { Course } from 'src/courses/entities/course';
+import { Course } from '../entites';
 import { IGenericRepository } from './generic-repository.abstract';
 
 

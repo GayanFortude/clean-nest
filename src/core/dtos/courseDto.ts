@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, ID, InputType, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class CourseDto {
@@ -7,3 +7,11 @@ export class CourseDto {
   @Field()
   code: string;
 }
+
+
+@InputType()
+export class UpdateCourseDto extends PartialType(CourseDto) {
+  @Field(() => ID)
+  id: string;
+}
+

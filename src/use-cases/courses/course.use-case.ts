@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { IDataServices } from 'src/core';
-import { Course } from 'src/courses/entities/course';
+import { Course, IDataServices } from 'src/core';
+
 import { CourseFactoryService } from './course-factory.service';
-import { CourseDto } from 'src/core/dtos';
+import { CourseDto, UpdateCourseDto } from 'src/core/dtos';
 @Injectable()
 export class CourseUseCases {
   constructor(private dataServices: IDataServices,
@@ -18,7 +18,16 @@ export class CourseUseCases {
   }
 
   createUser(createCourseDto: CourseDto): Promise<Course> {
-    const author = this.courseFactoryService.createNewAuthor(createCourseDto);
-    return this.dataServices.courses.create(author);
+    const course = this.courseFactoryService.createNewCourse(createCourseDto);
+    return this.dataServices.courses.create(course);
+  }
+
+
+  updateCourse(
+    id: string,
+    updateCourseDto: UpdateCourseDto,
+  ): Promise<Course> {
+    const course = this.courseFactoryService.updateCourse(updateCourseDto);
+    return this.dataServices.courses.update(id, course);
   }
 }

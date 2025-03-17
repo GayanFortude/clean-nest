@@ -14,8 +14,11 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { Course } from 'src/courses/type/courseType';
+
 import { CourseUseCases } from 'src/use-cases/courses/course.use-case';
+import { CourseDto, UpdateCourseDto } from 'src/core/dtos';
+import { Course } from 'src/frameworks/model/courses.model';
+
 
 @Resolver(() => Course)
 export class CourseResolver {
@@ -35,4 +38,19 @@ export class CourseResolver {
   createCourse(@Args('input') input: CourseDto) {
     return this.courseUseCases.createUser(input);
   }
+
+
+    @Mutation(() => Course) //Update user
+    async updateCourse(
+      @Args('input') updateCourseInput: UpdateCourseDto,
+    ): Promise<Course> {
+      try {
+        return this.courseUseCases.updateCourse(updateCourseInput.id, updateCourseInput);
+      } catch (error) {
+        if (error instanceof BadRequestException) {
+          throw new BadRequestException(error.message);
+        }
+        throw new InternalServerErrorException('An unexpected error occurred');
+      }
+    }
 }

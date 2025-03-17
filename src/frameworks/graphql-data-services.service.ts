@@ -3,9 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 
-import { Course } from 'src/courses/entities/course';
+
 import { IDataServices } from 'src/core/abstracts/data-service.abstract';
 import { PostGrayGenericRepository } from './graphql-generic-repository';
+import { Course } from 'src/core';
 
 
 @Injectable()

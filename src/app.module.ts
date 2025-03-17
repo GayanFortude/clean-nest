@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
-import { CourseModule } from './courses/course.module';
-import { Course as CourseEntity } from './courses/entities/course';
 import { DataServicesModule } from './services/data-services.module/data-services.module';
 import { CourseUseCasesModule } from './use-cases/courses/course-usecase.module';
 import { CourseResolver } from './resolvers/course.resolver';
@@ -29,7 +27,7 @@ function decrypt(encrypted: string): string {
 
 @Module({
   imports: [
-    DataServicesModule,
+    // DataServicesModule,
     CourseUseCasesModule
     // CourseModule,
     // TypeOrmModule.forRoot({

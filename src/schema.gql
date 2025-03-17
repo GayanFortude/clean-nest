@@ -15,9 +15,16 @@ type Query {
 
 type Mutation {
   createCourse(input: CourseDto!): Course!
+  updateCourse(input: UpdateCourseDto!): Course!
 }
 
 input CourseDto {
   name: String!
   code: String!
+}
+
+input UpdateCourseDto {
+  name: String
+  code: String
+  id: ID!
 }

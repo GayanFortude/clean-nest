@@ -21,7 +21,12 @@ export class PostGrayGenericRepository<T extends ObjectLiteral> implements IGene
     return await this.repository.save(item);
   }
 
-  async update(id: string, item: Partial<T>): Promise<void> {
+  async update(id: string, item: Partial<T>): Promise<T> {
     await this.repository.update(id, item);
+    const updated = await this.repository.findOneBy({ id } as any);
+    if (!updated) {
+      throw new Error('Entity not found');
+    }
+    return updated;
   }
 }
