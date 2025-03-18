@@ -1,3 +1,4 @@
+
 import { Course } from '../entites';
 import { IGenericRepository } from './generic-repository.abstract';
 

@@ -3,10 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostGrayDataServices } from './graphql-data-services.service';
 import { IDataServices } from 'src/core/abstracts/data-service.abstract';
 import { DATA_BASE_CONFIGURATION } from 'src/configeration';
-import { Course } from 'src/core';
+
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { Course } from './model/courses.model';
 
 @Module({
   imports: [

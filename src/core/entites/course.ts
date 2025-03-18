@@ -1,13 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-@Entity()
 export class Course {
-  @PrimaryGeneratedColumn('uuid')
+  @Field()
   id: string;
-  @Column()
+  @Field()
   name: string;
-  @Column()
+  @Field()
   code: string;
 }

@@ -1,8 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
-import { Course } from 'src/core';
-
-
 
 dotenv.config();
 
@@ -13,6 +10,6 @@ export const DATA_BASE_CONFIGURATION: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [Course],
+  entities: ['dist/**/*.model{.ts,.js}'],
   synchronize: true,
 };
